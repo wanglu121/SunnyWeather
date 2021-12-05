@@ -11,7 +11,7 @@ import com.example.sunnyweather.R
 import com.example.sunnyweather.logic.model.PlaceResponse
 import com.example.sunnyweather.ui.weather.WeatherActivity
 
-class PlaceAdapter(private val fragment: Fragment, private val placeList: List<PlaceResponse.Place>) :
+class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<PlaceResponse.Place>) :
 RecyclerView.Adapter<PlaceAdapter.ViewHolder>(){
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val placeName:TextView = view.findViewById(R.id.placeName)
@@ -29,6 +29,7 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder>(){
                 putExtra("location_lat", place.location.lat)
                 putExtra("place_name", place.name)
             }
+            fragment.viewModel.savePlace(place)
             fragment.startActivity(intent)
             fragment.activity?.finish()
         }
